@@ -5,6 +5,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --principal-font: "quicksand";
+  --secondary-font: "EB Garamond";
+  --third-font: "josefin Sans";
+}
+
 main{
   width: 100%;
   max-width: 100vw;
@@ -14,6 +23,9 @@ main{
 
 h1{
   margin-bottom: 50px;
+  color: var(--accent-color);
+  font-family: var(--principal-font);
+  font-weight: 900;
 }
 .hero{
   position: relative;
@@ -28,36 +40,42 @@ h1{
   height: auto;
   display: block;
   border-radius: 8px;
+  margin-bottom: 40px;
 }
 
 /* Caja de descripción sobre la imagen */
 .description {
   position: absolute;
-  top: 1px;
+  top: 0px;
   left: 10%;
-  background-color: rgba(183, 228, 240, 0.85); 
+  background-color: #84afe0da; 
   padding: 10px;
-  
   max-width: 150px;
 }
 
 .description p:first-child {
   font-weight: bold;
   font-size: 1.1rem;
-  color: #001d3d; 
+  color: rgb(22, 22, 22); 
+  font-family: var(--third-font);
   margin-bottom: 8px;
+ 
 }
 
 .description p {
   margin: 4px 0;
+  font-family: var(--principal-font);
   font-size: 0.9rem;
+  font-weight: 850;
+  
 }
 
 /* Botón Own Today*/
 .button {
   display: inline-block;
-  background-color: #0066cc;
+  background-color: var(--accent-color);
   color: white;
+  font-family: var(--primary-color);
   border: none;
   padding: 8px 14px;
   margin-top: 10px;
@@ -82,6 +100,7 @@ h1{
   box-sizing: border-box;
   padding: 2px;
   
+  
   & .upgradImg{
     display: flex;
     flex-direction: column;
@@ -90,7 +109,7 @@ h1{
     border: 1px solid rgb(46, 47, 61); 
     background-color: rgb(45, 142, 252);
     width: 90%;
-    height: 160px;
+    height: 180px;
     max-width: 250px; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -113,14 +132,20 @@ h1{
 .upgradImg figcaption {
   
   font-size: 0.9rem;
-  color: #030303;
-  background-color: #565c638c;
-  padding: 3px;
+  color:white;
+  background-color: rgb(45, 142, 252);
+  padding: 4px;
+  
 
 }
 .details{
   width: 95%;
   padding: 10px;
+  & h3{
+    color: var(--primary-color);
+    font-family: var(--principal-font);
+    font-weight: bolder;
+  }
 }
 
 #top-header{
@@ -132,7 +157,7 @@ h1{
   
   & a{
     text-decoration: none;
-    color: black;
+    color: var(--accent-color);
     margin-top: 10px;
   }
   
@@ -170,6 +195,7 @@ nav a {
 
 nav a:hover {
   text-decoration: underline;
+  color: var(--accent-color);
 }
 
 /* Responsivo */
