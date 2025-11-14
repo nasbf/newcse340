@@ -174,7 +174,8 @@ nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1.5rem;
+  gap: 1rem;
+  
 }
 
 nav a {
@@ -193,6 +194,66 @@ nav a:hover {
   color: black;
   font-weight: 600;
 }
+
+.vehicleDetail{
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+}
+  .vehicleImage{
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+  }
+  .vehicleImage img{
+    width: 100%;
+    height:250px;
+    box-shadow: 0 10px 20px var(--primary-color);
+    border-radius: 3px;
+  }
+
+  
+  .vehicleInformation{
+    grid-column: 3/4;
+    padding: 20px;
+    font-family: var(--principal-font);
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: rgb(236, 235, 235);
+  }
+  .datos{
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 10px var(--accent-color);
+    border-radius: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .datos p{
+    grid-column: 1/2;
+    margin: 0.3rem 0.8rem;
+    padding: 5px;
+
+  }
+  .datos .price{
+    grid-column: 2/3;
+    grid-row: 2;
+    background-color: rgb(231, 229, 229);
+    width: 70%;
+    color: var(--accent-color);
+    padding: 5px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    box-shadow: 0 4px 10px var(--accent-color);
+    border-radius: 3px;
+    
+  }
 
 /* Responsivo */
 
@@ -240,6 +301,32 @@ nav a:hover {
     top: 20%;
     height: 190px;
     width: 20%;
+  }   
+  .vehicleDetail{
+    display: grid;
+    grid-template-columns: 1fr 1% 1fr;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+
   }
+  .vehicleImage{
+    grid-column: 1/2;
+    padding: 20px;
+    margin: auto;
+  }
+  .vehicleImage img{
+      height: 350px;
+      width: 400px;
+  }
+
+  
+  .vehicleInformation{
+    grid-column: 3/4;
+  }
+  
+  
+
+
   
 }

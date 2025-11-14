@@ -68,19 +68,17 @@ Util.buildDetailGrid = function (data){
   let detail = `
     <section class="vehicleDetail">
       <div class="vehicleImage">
-        <img src="${item.inv_image}" alt="Image of ${item.inv_make}"
+        <img src="${item.inv_image}" alt="Image of ${item.inv_make}">
       </div>
       <div class="vehicleInformation">
         <h2>${item.inv_make} - ${item.inv_model} </h2>
-        <p>Year: ${item.inv_year}</p>
-        <p class="price">Price: $${new Intl.NumberFormat("en-US").format(item.inv_price)}</p>
+        <div class="datos">
+          <p>Year: ${item.inv_year}</p>
+          <p>color:  ${item.inv_color}</p>
+          <p>Miles: ${new Intl.NumberFormat("en-US").format(item.inv_miles)}</p>
+          <p class="price">Price: $${new Intl.NumberFormat("en-US").format(item.inv_price)}</p>
+        </div>
         <p>Description: ${item.inv_description}</p>
-        <p>color:  ${item.inv_color}</p>
-      <div class = "miles">
-        <p>Miles: ${new Intl.NumberFormat("en-US").format(item.inv_miles)}</p>
-      </div>
-      
-      
       </div>
     </section>`
   
