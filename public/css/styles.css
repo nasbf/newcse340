@@ -271,15 +271,20 @@ nav a:hover {
   color: white;
 }
 
-fieldset{
+.loginForm fieldset{
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: 20px;
   border: none;
-
-  
 }
+
+.loginForm legend{
+  
+  color: white;
+  font-size: 1.1rem;
+} 
+
 .formLabel{
   font-size: 1.1rem;
   color: white;
@@ -297,10 +302,61 @@ fieldset{
   margin-top: 5px;
   
 }
+.loginForm a{
+  color: white;
+  font-size: 1.3rem;
+  font-family: var(--secondary-font);
+}
+/*********
+/* register form css
+/****/
+.loginRegister{
+  background-color: var(--primary-color);
+  display:flex;
+  flex-direction: column;
+  width: 95%;
+  align-items: center;
+  border-radius: 8px;
+  padding: 20px;
+  margin: auto;
+}
+
+.loginRegister fieldset{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 20px;
+  border: none;
+}
+
+.loginRegister legend{
+  
+  color: white;
+  font-size: 1.1rem;
+} 
+
+.regLabel{
+  font-size: 1.1rem;
+  color: white;
+}
+
+.regLabel input{
+  width: 100%;
+  height: 2.5rem;
+  font-family: var(--principal-font);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  
+}
 
 
+/***********************/
 /* Responsivo */
-
+/***********************/
 @media (min-width: 768px) {
   main {
     width: 80%;
@@ -369,11 +425,9 @@ fieldset{
     grid-column: 3/4;
   }
   
-  
-  .loginForm{
+  .loginForm, .loginRegister{
     width: 40%;
   }
-
 
   
 }
