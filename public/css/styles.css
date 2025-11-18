@@ -329,16 +329,12 @@ nav a:hover {
   border: none;
 }
 
-.loginRegister legend{
+.loginRegister, legend, p, .regLabel{
   
   color: white;
   font-size: 1.1rem;
 } 
 
-.regLabel{
-  font-size: 1.1rem;
-  color: white;
-}
 
 .regLabel input{
   width: 100%;
