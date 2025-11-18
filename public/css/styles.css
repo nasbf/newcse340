@@ -255,6 +255,50 @@ nav a:hover {
     
   }
 
+/*login form css*/
+
+.loginForm{
+  background-color: var(--primary-color);
+  display:flex;
+  flex-direction: column;
+  width: 95%;
+  align-items: center;
+  border-radius: 8px;
+  padding: 20px;
+  margin: auto;
+}
+.loginForm p{
+  color: white;
+}
+
+fieldset{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 20px;
+  border: none;
+
+  
+}
+.formLabel{
+  font-size: 1.1rem;
+  color: white;
+}
+
+.formLabel input{
+  width: 100%;
+  height: 2.5rem;
+  font-family: var(--principal-font);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  
+}
+
+
 /* Responsivo */
 
 @media (min-width: 768px) {
@@ -326,6 +370,9 @@ nav a:hover {
   }
   
   
+  .loginForm{
+    width: 40%;
+  }
 
 
   

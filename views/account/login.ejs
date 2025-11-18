@@ -9,4 +9,20 @@
 
 <%- messages() %>
 
-<p>prueba form</p>
+<div class="containerForm">
+  <form action="/account/login" method="post" class="loginForm">
+    <fieldset>
+      <label class="formLabel">Email: * <input type="email" id="account_email" name="account_email" required placeholder="xxxxxx@xxx.com"></label>
+    
+      <label class="formLabel">Password: *<input type="password" id="account_password" name= "account_password" required pattern="[A-Za-z0-9\s#\-,\.\/]{8,}"></label>
+    </fieldset>
+
+      <button type="submit" class="button">LOGIN</button>
+      
+      <P>No account? </P>
+      <a href="#" >Sign-up</a>
+    
+  </form>
+
+  
+</div>
