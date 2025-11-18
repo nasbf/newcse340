@@ -1,0 +1,12 @@
+<!-- title as h1 -->
+ <% if (title) { %>
+<h1><%= title %> </h1>
+
+<% } else {
+  res.redirect('/')
+} %>
+
+
+<%- messages() %>
+
+<p>prueba form</p>
