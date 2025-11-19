@@ -8,12 +8,19 @@
 
 
 <%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 <div class="containerRegister">
   <form action="/account/register" method="post" class="loginRegister">
     <fieldset >
       <legend>Register Information</legend>
         <label class="regLabel">First Name: * <input type="text" id="account_firstname" name="account_firstname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"></label>
-        <label class="regLabel">Last Name: * <input type="text" id="account_lastname" name="account_lastname" required></label>
+        <label class="regLabel">Last Name: * <input type="text" id="account_lastname" name="account_lastname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"></label>
       <label class="regLabel">Email: * <input type="email" id="account_email" name="account_email" required placeholder="xxxxxx@xxx.com"></label>
     
       <p>"Password must be at least 12 characters, include 1 uppercase letter, 1 number, and 1 special character."</p>

@@ -35,6 +35,9 @@ importers:
       express-session:
         specifier: ^1.18.2
         version: 1.18.2
+      express-validator:
+        specifier: ^7.3.0
+        version: 7.3.0
       pg:
         specifier: ^8.8.0
         version: 8.16.3
@@ -337,6 +340,10 @@ packages:
   express-session@1.18.2:
     resolution: {integrity: sha512-SZjssGQC7TzTs9rpPDuUrR23GNZ9+2+IkA/+IJWmvQilTr5OSliEHGF+D9scbIpdC6yGtTI0/VhaHoVes2AN/A==}
     engines: {node: '>= 0.8.0'}
+
+  express-validator@7.3.0:
+    resolution: {integrity: sha512-ujK2BX5JUun5NR4JuBo83YSXoDDIpoGz3QxgHTzQcHFevkKnwV1in4K7YNuuXQ1W3a2ObXB/P4OTnTZpUyGWiw==}
+    engines: {node: '>= 8.0.0'}
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -873,6 +880,10 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
+  validator@13.15.23:
+    resolution: {integrity: sha512-4yoz1kEWqUjzi5zsPbAS/903QXSYp0UOtHsPpp7p9rHAw/W+dkInskAE386Fat3oKRROwO98d9ZB0G4cObgUyw==}
+    engines: {node: '>= 0.10'}
+
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
@@ -1256,6 +1267,11 @@ snapshots:
       uid-safe: 2.1.5
     transitivePeerDependencies:
       - supports-color
+
+  express-validator@7.3.0:
+    dependencies:
+      lodash: 4.17.21
+      validator: 13.15.23
 
   express@4.21.2:
     dependencies:
@@ -1836,6 +1852,8 @@ snapshots:
   unpipe@1.0.0: {}
 
   utils-merge@1.0.1: {}
+
+  validator@13.15.23: {}
 
   vary@1.1.2: {}
 
