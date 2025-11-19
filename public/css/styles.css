@@ -346,9 +346,19 @@ nav a:hover {
   border-radius: 8px;
   border: none;
   margin-top: 5px;
+
   
 }
-
+input:required:invalid  {
+  border: solid 1px var(--accent-color);
+}
+input:focus:invalid {
+  background-color: var(--accent-color);
+}
+input:valid {
+  border: solid 3px  rgb(55, 160, 81);
+  
+}
 
 /***********************/
 /* Responsivo */
