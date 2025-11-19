@@ -2,7 +2,7 @@
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+  
 }
 
 :root {
@@ -19,6 +19,7 @@ main{
   max-width: 100vw;
   overflow-x: hidden; 
   margin: 0 auto;
+  background-color: white;
 }
 
 h1{
@@ -26,12 +27,14 @@ h1{
   color: var(--accent-color);
   font-family: var(--principal-font);
   font-weight: 900;
+
 }
 .hero{
   position: relative;
   width: 100%;
   max-width: 600px; /* ajusta el tamaño total */
   margin: 0 auto;
+  
 }
 
 .hero img {
@@ -329,7 +332,7 @@ nav a:hover {
   border: none;
 }
 
-.loginRegister, legend, p, .regLabel{
+.loginRegister, legend, .regLabel{
   
   color: white;
   font-size: 1.1rem;
@@ -364,12 +367,35 @@ input:valid {
 /* Responsivo */
 /***********************/
 @media (min-width: 768px) {
+  body{
+  background-image: url("/images/site/small_check.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+header, footer{
+  background-color: white;
+  padding: 20px;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+footer p{
+  color: var(--primary-color);
+  font-family: var(--principal-font);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: 20px;
+}
   main {
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
-    border: 4px solid rgb(145, 145, 236);
+    padding: 20px;
+    
   }
+
   
   nav ul {
     display: flex;
