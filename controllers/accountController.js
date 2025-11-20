@@ -1,3 +1,4 @@
+
 const utilities = require("../utilities")
 const models = require("../models/account-model.js")
 
@@ -9,6 +10,7 @@ async function buildLogin(req, res, next) {
   res.render("account/login", {
     title: "Login",
     nav,
+    errors: null,
     
   })
 }
@@ -56,4 +58,5 @@ async function registerAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount }
+
+module.exports = { buildLogin, buildRegister, registerAccount}

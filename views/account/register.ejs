@@ -19,9 +19,9 @@
   <form action="/account/register" method="post" class="loginRegister">
     <fieldset >
       <legend>Register Information</legend>
-        <label class="regLabel">First Name: * <input type="text" id="account_firstname" name="account_firstname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"></label>
-        <label class="regLabel">Last Name: * <input type="text" id="account_lastname" name="account_lastname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"></label>
-      <label class="regLabel">Email: * <input type="email" id="account_email" name="account_email" required placeholder="xxxxxx@xxx.com"></label>
+        <label class="regLabel">First Name: * <input type="text" id="account_firstname" name="account_firstname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" value="<%= locals.account_firstname %>"></label>
+        <label class="regLabel">Last Name: * <input type="text" id="account_lastname" name="account_lastname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" value="<%= locals.account_lastname %>"></label>
+      <label class="regLabel">Email: * <input type="email" id="account_email" name="account_email" required placeholder="xxxxxx@xxx.com" value="<%= locals.account_email %>"></label>
     
       <p>"Password must be at least 12 characters, include 1 uppercase letter, 1 number, and 1 special character."</p>
       <label class="regLabel">Password: *<input type="password" id="account_password" name= "account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"></label>
