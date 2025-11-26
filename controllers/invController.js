@@ -38,4 +38,92 @@ invCont.buildByInvId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build management inventory view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    errors: null
+  })
+}
+
+/* ***************************
+ *  Build add clasification view
+ * ************************** */
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/addClassification", {
+    title: "Add New Classification",
+    nav,
+    errors: null
+  })
+}
+
+/* ***************************
+ *  Build add new vehicle view
+ * ************************** */
+invCont.buildAddNewVehicle = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+  res.render("inventory/addNewVehicle", {
+    title: "Add New Vehicle",
+    nav,
+    classificationList,
+    errors: null
+  })
+}
+
+/* ****************************************
+ *  Process Add New Vehicle
+ * **************************************** */
+invCont.addVehicle = async function (req, res) {
+  let nav = await utilities.getNav()
+
+  // Recibir datos del formulario
+  const {
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color
+  } = req.body
+
+  // Insertar en la BD
+  const addResult = await invModel.addInventory(
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color
+  )
+
+  
+  if (addResult) {
+    req.flash("notice", `${inv_make} ${inv_model} was successfully added.`)
+    res.redirect("/inv/management")
+  } else {
+    req.flash("notice", "Sorry, adding the vehicle failed.")
+    const classificationList = await utilities.buildClassificationList(classification_id)
+    res.status(501).render("inventory/addNewVehicle", {
+      title: "Add New Vehicle",
+      nav,
+      classificationList,
+      errors: null
+    })
+  }
+}
+
 module.exports = invCont

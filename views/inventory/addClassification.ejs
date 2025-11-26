@@ -1,0 +1,35 @@
+<!-- title as h1 -->
+ <% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+
+<div class="containerForm">
+  <form class="loginForm" action="/inventory/addClassification" method="post">
+    <fieldset >
+      
+      <label class="formLabel">Classification Name
+        <p>Name must be alphabetic characters</p>
+        <input type="text" id="ClassificationName" name="classificationName" required value="<%= locals.classificationName %>"></label>
+    
+      </fieldset>
+
+      <button type="submit" class="button">Add Classification</button>
+      
+      
+    
+  </form>
+
+  
+</div>
