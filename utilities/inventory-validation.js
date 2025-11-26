@@ -74,7 +74,7 @@ validate.checkInventoryData = async (req, res, next) => {
     let nav = await utilities.getNav()
     const classificationList = await utilities.buildClassificationList(req.body.classification_id)
 
-    req.flash("notice", "Please correct the errors below.")
+    
 
     return res.render("inventory/addNewVehicle", {
       title: "Add New Vehicle",
@@ -94,6 +94,37 @@ validate.checkInventoryData = async (req, res, next) => {
     })
   }
 
+  next()
+}
+
+/* **********************************
+ * classification Validation Rules
+ ********************************** */
+validate.classificationRules = () => {
+  return [
+    body("classification_name")
+      .trim()
+      .notEmpty()
+      .escape()
+      .matches(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/)
+      .withMessage("Classification must contain letters only."),
+  ]
+}
+
+/* **********************************
+ * Check Validation Results classification
+ *********************************** */
+validate.checkClassificationData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    return res.render("inventory/addClassification", {
+      title: "Add New Classification",
+      nav,
+      errors,
+      
+    })
+  }
   next()
 }
 

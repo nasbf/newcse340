@@ -5,7 +5,7 @@
   res.redirect('/')
 } %>
 
-<% messages() %>
+<%- messages() %>
 <% if (errors) { %>
   <ul class="notice">
  <% errors.array().forEach(error => { %>
@@ -16,12 +16,12 @@
 
 
 <div class="containerForm">
-  <form class="loginForm" action="/inventory/addClassification" method="post">
+  <form class="loginForm" action="/inv/add-classification" method="post">
     <fieldset >
       
       <label class="formLabel">Classification Name
         <p>Name must be alphabetic characters</p>
-        <input type="text" id="ClassificationName" name="classificationName" required value="<%= locals.classificationName %>"></label>
+        <input type="text" id="classification_name" name="classification_name" required pattern="[^0-9]*"></label>
     
       </fieldset>
 
