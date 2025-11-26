@@ -9,7 +9,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildByInvId);
 router.get("/management", invController.buildManagement);
 router.get("/add-classification", invController.buildAddClassification);
-router.get("/add-vehicl/e", invController.buildAddNewVehicle);
+router.get("/add-vehicle", invController.buildAddNewVehicle);
 router.get("/add-classification", invController.buildAddNewVehicle);
 
 router.post(
