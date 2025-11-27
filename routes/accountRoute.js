@@ -24,9 +24,19 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLogData,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  utilities.handleErrors(accountController.accountLogin)
+  // (req, res) => {
+  //   res.status(200).send('login process')
+  // }
 )
+
+router.get(
+  "/",
+  // regValidate.loginRules(),
+  // regValidate.checkLogData,
+  utilities.handleErrors(accountController.buildLogged)
+  
+)
+
 
 module.exports = router;
