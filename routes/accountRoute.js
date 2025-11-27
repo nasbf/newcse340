@@ -34,7 +34,7 @@ router.get(
   "/",
   // regValidate.loginRules(),
   // regValidate.checkLogData,
-  utilities.handleErrors(accountController.buildLogged)
+  utilities.checkLogin, utilities.handleErrors(accountController.buildLogged)
   
 )
 
