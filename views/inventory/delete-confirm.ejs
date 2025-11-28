@@ -1,0 +1,37 @@
+<!-- title as h1 -->
+ <% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) {%>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div class="containerRegister">
+  <p>Confirm Deletion - The deletion is permanent.</p>
+  <form action="/inv/delete" method="post" class="loginRegister">
+    <fieldset >
+      <legend>Delete Vehicle.</legend>
+      <input type="hidden" name="inv_id" value="<%= itemData.inv_id %>">
+        
+        <label class="regLabel">Make * <input type="text" id="inv_make" name="inv_make" value="<%= itemData.inv_make %>" readonly ></label>
+        <label class="regLabel">Model * <input type="text" id="inv_model" name="inv_model" value="<%= itemData.inv_model %>" readonly></label>
+        <label class="regLabel">Price * <input type="number" id="inv_price" name="inv_price" value="<%= itemData.inv_price %>" readonly></label>
+        <label class="regLabel">Year * <input type="number" id="inv_year" name="inv_year" value="<%= itemData.inv_year %>" readonly></label>
+        
+    </fieldset>
+      
+      <button type="submit" class="button">Delete Vehicle</button>
+      
+    
+  </form>
+
+  
+</div> 

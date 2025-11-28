@@ -273,4 +273,49 @@ invCont.updateInventory = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Build Delete View
+ * ************************** */
+// invCont.buildDeleteView = async function (req, res, next) {
+//   const inv_id = parseInt(req.params.inv_id)
+//   let nav = await utilities.getNav()
+//   const itemData = await invModel.getInventoryByInvId(inv_id)
+//   const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+//   res.render("inventory/delete-confirm", {
+//     title: "Delete" + itemName,
+//     nav,
+//     errors: null,
+//     inv_id: itemData.inv_id,
+//     inv_make: itemData.inv_make,
+//     inv_model: itemData.inv_model,
+//     inv_year: itemData.inv_year,
+//     inv_price: itemData.inv_price,
+//   })
+// };
+
+invCont.buildDeleteView = async function (req, res, next) {
+  try {
+    const inv_id = parseInt(req.params.inv_id);
+    const data = await invModel.getInventoryByInvId(inv_id);
+
+    if (!data || data.length === 0) {
+      req.flash("notice", "Vehicle not found.");
+      return res.redirect("/inv/");
+    }
+    const itemData = data[0];
+    let nav = await utilities.getNav();
+
+    return res.render("./inventory/delete-confirm", {
+      title: `Delete ${itemData.inv_make} ${itemData.inv_model} ${itemData.inv_model}`,
+      nav,
+      itemData,
+      errors: null
+    });
+  } catch (error) {
+    console.error("Error loading delete view:", error);
+    next(error);
+  }
+};
+
+
 module.exports = invCont

@@ -47,4 +47,15 @@ router.post(
   
 )
 
+/****** Team activity  *******/
+
+router.get(
+  "/delete/:inv_id", 
+  utilities.handleErrors(invController.buildDeleteView)
+)
+router.post(
+  "/delete/", 
+  utilities.handleErrors(invController.DeleteVehicle)
+)
+
 module.exports = router;
