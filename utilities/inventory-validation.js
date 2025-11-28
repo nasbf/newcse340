@@ -74,8 +74,6 @@ validate.checkInventoryData = async (req, res, next) => {
     let nav = await utilities.getNav()
     const classificationList = await utilities.buildClassificationList(req.body.classification_id)
 
-    
-
     return res.render("inventory/addNewVehicle", {
       title: "Add New Vehicle",
       nav,
@@ -96,6 +94,39 @@ validate.checkInventoryData = async (req, res, next) => {
 
   next()
 }
+
+/* **********************************
+ * Check Validation Results redirect edit view (from form to edit vehicle) 
+ *********************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const classificationSelect = await utilities.buildClassificationList(req.body.classification_id)
+
+    return res.render("inventory/edit", {
+      title: `Edit ${req.body.inv_make} ${req.body.inv_model}`,
+      nav,
+      classificationSelect,
+      errors,
+      inv_id: req.body.inv_id,
+      inv_make: req.body.inv_make,
+      inv_model: req.body.inv_model,
+      inv_description: req.body.inv_description,
+      inv_image: req.body.inv_image,
+      inv_thumbnail: req.body.inv_thumbnail,
+      inv_price: req.body.inv_price,
+      inv_year: req.body.inv_year,
+      inv_miles: req.body.inv_miles,
+      inv_color: req.body.inv_color,
+      classification_id: req.body.classification_id
+    })
+  }
+
+  next()
+}
+
 
 /* **********************************
  * classification Validation Rules

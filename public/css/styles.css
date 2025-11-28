@@ -1,9 +1,8 @@
 /******* Change Box Model ***************/
 *,
 *:before,
-*:after {
-  
-}
+*:after, 
+
 
 :root {
   --primary-color: #2c3e50;
@@ -338,6 +337,28 @@ nav a:hover {
   font-size: 1.1rem;
 } 
 
+.regLabel textarea{
+  height: 100px;
+  width: 100%;
+  font-family: var(--principal-font);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+}
+textarea:required:invalid  {
+  border: solid 1px var(--accent-color);
+}
+textarea:focus:invalid {
+  background-color: var(--accent-color);
+}
+
+input:valid {
+  border: solid 3px  rgb(55, 160, 81);
+  
+}
 
 .regLabel input{
   width: 100%;
@@ -363,9 +384,7 @@ input:valid {
   
 }
 
-.classificationSelect{
-  background-color: red;
-}
+
 #inventoryDisplay {
   background-color: var(--primary-color);
   margin-top: 40px;

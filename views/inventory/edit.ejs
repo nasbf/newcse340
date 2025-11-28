@@ -1,0 +1,88 @@
+<!-- title as h1 -->
+<% console.log("EJS RECIBE itemData:", itemData) %>
+<% console.log("EJS RECIBE locals:", locals) %>
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+  </ul>
+<% } %>
+
+<div class="containerRegister">
+  <form action="/inv/update" method="post" class="loginRegister">
+    <fieldset>
+      <legend>Edit Vehicle</legend>
+
+      <!-- Hidden inv_id principal -->
+      <input type="hidden" name="inv_id" value="<%= itemData?.inv_id || locals.inv_id %>">
+
+      <label class="regLabel">Classification *</label>
+      <%- classificationSelect %>
+
+      <label class="regLabel">Make *
+        <input type="text" id="inv_make" name="inv_make"
+          required
+          pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$"
+          value="<%= itemData?.inv_make || locals.inv_make %>">
+      </label>
+
+      <label class="regLabel">Model *
+        <input type="text" id="inv_model" name="inv_model"
+          required minlength="3"
+          value="<%= itemData?.inv_model || locals.inv_model %>">
+      </label>
+
+      <label class="regLabel">Description *
+        <textarea id="inv_description" name="inv_description" required><%= itemData?.inv_description || locals.inv_description %></textarea>
+      </label>
+
+      <label class="regLabel">Imagen Path *
+        <input type="text" id="inv_image" name="inv_image"
+          required placeholder="/images/vehicle.jpg"
+          value="<%= itemData?.inv_image || locals.inv_image %>">
+      </label>
+
+      <label class="regLabel">Thumbnail Path *
+        <input type="text" id="inv_thumbnail" name="inv_thumbnail"
+          required placeholder="/images/vehicle.jpg"
+          value="<%= itemData?.inv_thumbnail || locals.inv_thumbnail %>">
+      </label>
+
+      <label class="regLabel">Price *
+        <input type="number" id="inv_price" name="inv_price"
+          required step="0.01"
+          value="<%= itemData?.inv_price || locals.inv_price %>">
+      </label>
+
+      <label class="regLabel">Year *
+        <input type="number" id="inv_year" name="inv_year"
+          required min="1900" max="2099"
+          value="<%= itemData?.inv_year || locals.inv_year %>">
+      </label>
+
+      <label class="regLabel">Miles *
+        <input type="number" id="inv_miles" name="inv_miles"
+          required min="0"
+          value="<%= itemData?.inv_miles || locals.inv_miles %>">
+      </label>
+
+      <label class="regLabel">Color *
+        <input type="text" id="inv_color" name="inv_color"
+          required
+          value="<%= itemData?.inv_color || locals.inv_color %>">
+      </label>
+
+    </fieldset>
+
+    <button type="submit" class="button">Update Vehicle</button>
+  </form>
+</div>

@@ -22,7 +22,7 @@
         <%- classificationList %>
         <label class="regLabel">Make * <input type="text" id="inv_make" name="inv_make" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" value="<%= locals.inv_make %>"></label>
         <label class="regLabel">Model * <input type="text" id="inv_model" name="inv_model" required minlength="3" placeholder="3 characters" value="<%= locals.inv_model %>"></label>
-        <label class="regLabel">Description * <textarea id="inv_description" name="inv_description" required></textarea></label>
+        <label class="regLabel">Description * <textarea id="inv_description" name="inv_description" required><%= locals.inv_description %></textarea></label>
         <label class="regLabel">Imagen Path * <input type="text" id="inv_image" name="inv_image" required placeholder="/images/vehicle.jpg" value="<%= locals.inv_image %>"></label>
         <label class="regLabel">Thumbnail Path * <input type="text" id="inv_thumbnail" name="inv_thumbnail" required placeholder="/images/vehicle.jpg" value="<%= locals.inv_thumbnail %>"></label>
         <label class="regLabel">Price * <input type="number" id="inv_price" name="inv_price" required step="0.01" value="<%= locals.inv_price %>"></label>

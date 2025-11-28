@@ -184,6 +184,93 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
+/* ***************************
+ *  Build Edit Inventory View
+ * ************************** */
+invCont.buildEditInventoryView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
 
+  const itemData = await invModel.getInventoryByInvId(inv_id)
+
+  if (!itemData || itemData.length === 0) {
+    return next(new Error("Item not found"))
+  }
+
+  let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList(itemData[0].classification_id)
+
+  res.render("inventory/edit", {
+    title: `Edit ${itemData[0].inv_make} ${itemData[0].inv_model}`,
+    nav,
+    classificationSelect,
+    itemData: itemData[0],
+    errors: null
+  })
+}
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+  const updateResult = await invModel.updateInventory(
+    inv_id,  
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  )
+
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash("notice", `The ${itemName} was successfully updated.`)
+    res.redirect("/inv/management")
+  } else {
+
+    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+
+    res.status(501).render("inventory/edit", {
+
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect,
+      errors: null,
+      itemData: {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+      }
+    })
+  }
+}
 
 module.exports = invCont
