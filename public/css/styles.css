@@ -363,6 +363,65 @@ input:valid {
   
 }
 
+.classificationSelect{
+  background-color: red;
+}
+#inventoryDisplay {
+  background-color: var(--primary-color);
+  margin-top: 40px;
+  font-family: var(--principal-font);
+  color: white; 
+  padding: 20px;
+}
+#inventoryDisplay{
+  border-radius: 10px;
+}
+
+#inventoryDisplay .datatable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--principal-font);
+   
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: white;      
+ 
+}
+
+#inventoryDisplay td a{
+  text-decoration: none;
+  color: white;
+}
+
+#inventoryDisplay td a:hover {
+  color: var(--accent-color); 
+  text-decoration: underline; 
+}
+
+#inventoryDisplay th {
+  background-color: #2a2a2a;
+  font-size: 1.2rem;
+  font-family: var(--secondary-font);
+}
+
+select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #333;
+  background-color: rgb(223, 223, 223);
+  font-family: var(--principal-font);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  cursor: pointer;
+  outline: none;
+  margin-top: 10px;
+}
+
 /***********************/
 /* Responsivo */
 /***********************/
