@@ -317,5 +317,62 @@ invCont.buildDeleteView = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Build Delete View
+ * ************************** */
+invCont.buildDeleteView = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  const itemData = await invModel.getInventoryByInvId(inv_id)
+
+  if (!itemData || itemData.length === 0) {
+    return next(new Error("Item not found"))
+  }
+
+  let nav = await utilities.getNav()
+  const item = itemData[0]
+  const classificationSelect = await utilities.buildClassificationList(item.classification_id)
+
+  res.render("inventory/delete-confirm", {
+    title: `Delete ${item.inv_make} ${item.inv_model}`,
+    nav,
+    itemData: item,
+    classificationSelect,
+    errors: null
+  })
+}
+
+/* ***************************
+ *   Delete Inventory
+ * ************************** */
+  invCont.deleteInventoryItem = async function (req, res, next) {
+  const inv_id = parseInt(req.body.inv_id)
+
+  if (!inv_id || Number.isNaN(inv_id)) {
+    req.flash("notice", "Invalid item id.")
+    return res.redirect("/inv/management")
+  }
+
+  try {
+    
+    const itemData = await invModel.getInventoryByInvId(inv_id)
+    if (!itemData || itemData.length === 0) {
+      req.flash("notice", "Item not found.")
+      return res.redirect("/inv/management")
+    }
+    const item = itemData[0]
+    const deleteResult = await invModel.deleteInventoryItem(inv_id)
+    if (deleteResult && deleteResult.rowCount > 0) {
+      req.flash("notice", `The ${item.inv_make} ${item.inv_model} was successfully deleted.`)
+      return res.redirect("/inv/management")
+    } else {
+      req.flash("notice", "Deletion failed.")
+      return res.redirect(`/inv/delete/${inv_id}`)
+    }
+  } catch (error) {
+    console.error("Delete controller error:", error)
+    req.flash("notice", "An error occurred while trying to delete.")
+    return res.redirect("/inv/management")
+  }
+}
 
 module.exports = invCont
