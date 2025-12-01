@@ -1,0 +1,46 @@
+<!-- title as h1 -->
+ <% if (title) { %>
+<h1><%= title %> </h1>
+
+<% } else {
+  res.redirect('/')
+} %>
+
+
+<%- messages() %>
+
+<% if (errors) {%>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div class="containerRegister">
+  <form action="/account/update" method="post" class="loginRegister">
+    <fieldset >
+      <legend>Edit Account</legend>
+        <label class="regLabel">First Name: * <input type="text" id="account_firstname" name="account_firstname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" value="<%= locals.account_firstname %>"></label>
+        <label class="regLabel">Last Name: * <input type="text" id="account_lastname" name="account_lastname" required pattern="^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$" value="<%= locals.account_lastname %>"></label>
+        <label class="regLabel">Email: * <input type="email" id="account_email" name="account_email" required placeholder="xxxxxx@xxx.com" value="<%= locals.account_email %>"></label>
+        <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+        
+      </fieldset>
+      <button type="submit" class="button">Update</button>
+  </form>
+
+  <form action="/account/password" method="post" class="loginRegister">
+    <fieldset >
+      <legend>Update Password</legend>
+
+      <p>"Password must be at least 12 characters, include 1 uppercase letter, 1 number, and 1 special character."</p>
+      <label class="regLabel">Password: *<input type="password" id="account_password" name= "account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"></label>
+      <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+    </fieldset>
+      <button type="submit" class="button">Change Password</button>
+      
+    
+  </form>
+
+  
+</div>

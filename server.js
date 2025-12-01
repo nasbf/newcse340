@@ -18,6 +18,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require ("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const { buildLogged } = require("./controllers/accountController")
 
 /* ***********************
  * Middleware
@@ -69,6 +70,9 @@ app.use("/inv", inventoryRoute)
 
 // account route
 app.use("/account", accountRoute)
+
+
+
 
 app.use(static)
 

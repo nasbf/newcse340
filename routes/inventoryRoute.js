@@ -6,56 +6,70 @@ const invValidate = require("../utilities/inventory-validation")
 const utilities = require("../utilities/")
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
-router.get("/detail/:invId", invController.buildByInvId);
-router.get("/management", invController.buildManagement);
-router.get("/add-classification", invController.buildAddClassification);
-router.get("/add-vehicle", invController.buildAddNewVehicle);
+// NO PROTEGER estas (son públicas)
+router.get("/type/:classificationId", invController.buildByClassificationId)
+router.get("/detail/:invId", invController.buildByInvId)
 
-
-
-router.post(
-  "/add-vehicle",
-  invValidate.inventoryRules(),
-  invValidate.checkInventoryData,
-  invController.addVehicle
-  
+// PROTEGER TODAS ESTAS
+router.get(
+  "/management",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.buildManagement)
 )
 
+router.get(
+  "/add-classification",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.buildAddClassification)
+)
 
 router.post(
   "/add-classification",
+  utilities.checkEmployeeOrAdmin,
   invValidate.classificationRules(),
   invValidate.checkClassificationData,
-  invController.addClassification,
-)
-router.get(
-  "/getInventory/:classification_id", 
-  utilities.handleErrors(invController.getInventoryJSON)
+  invController.addClassification
 )
 
 router.get(
-  "/edit/:inv_id", 
+  "/add-vehicle",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.buildAddNewVehicle)
+)
+
+router.post(
+  "/addNewVvehicle",
+  utilities.checkEmployeeOrAdmin,
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
+  invController.addVehicle
+)
+
+router.get(
+  "/edit/:inv_id",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildEditInventoryView)
 )
 
 router.post(
-  "/update/", 
-  invValidate.inventoryRules(),   
+  "/update/",
+  utilities.checkEmployeeOrAdmin,
+  invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   invController.updateInventory
-  
 )
-
-/****** Team activity  *******/
 
 router.get(
-  "/delete/:inv_id", 
+  "/delete/:inv_id",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.buildDeleteView)
 )
+
 router.post(
-  "/delete/", 
+  "/delete/",
+  utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.deleteInventoryItem)
 )
+
 
 module.exports = router;

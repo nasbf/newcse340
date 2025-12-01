@@ -128,7 +128,8 @@ async function checkJWTToken(req, res, next) {
     res.locals.account_firstname = decoded.account_firstname
     res.locals.account_email = decoded.account_email
     res.locals.account_id = decoded.account_id
-
+    res.locals.account_type = decoded.account_type
+    console.log("JWT decodificado:", decoded)
     return next()
   } catch (error) {
     res.clearCookie("jwt")
@@ -175,6 +176,56 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+ /* ****************************************
+ * Middleware to allow only Employee/Admin
+ **************************************** */
+Util.checkEmployeeOrAdmin = async function(req, res, next) {
+  const token = req.cookies ? req.cookies.jwt : null
+
+  if (!token) {
+    const nav = await Util.getNav()
+    req.flash("notice", "Please log in.")
+    return res.status(401).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+
+    // Save locals
+    res.locals.loggedin = true
+    res.locals.account_firstname = decoded.account_firstname
+    res.locals.account_email = decoded.account_email
+    res.locals.account_id = decoded.account_id
+    res.locals.account_type = decoded.account_type
+
+    // Check role
+    if (decoded.account_type === "Employee" || decoded.account_type === "Admin") {
+      return next()
+    } else {
+      const nav = await Util.getNav()
+      req.flash("notice", "You do not have permission to access that page, please login.")
+      return res.status(403).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+      })
+    }
+  } catch (error) {
+    res.clearCookie("jwt")
+    const nav = await Util.getNav()
+    req.flash("notice", "Please log in.")
+    return res.status(401).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+    })
+  }
+}
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
