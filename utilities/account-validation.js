@@ -123,6 +123,37 @@ validate.checkLogData = async (req, res, next) => {
 
 
 /*edit account*/
+
+validate.EditAccountRules = () => {
+    return [
+      body("account_firstname")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/)
+        .withMessage("Please provide a first name, (letters only)."), // on error this message is sent.
+  
+      // lastname is required and must be string
+      body("account_lastname")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .matches(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/)
+        .withMessage("Please provide a last name, (letters only)."), // on error this message is sent.
+  
+      body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail() // refer to validator.js docs
+      .withMessage("A valid email is required."),
+    ]
+  }
+
+
 validate.checkEditData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email, account_id } =
     req.body

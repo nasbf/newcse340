@@ -173,37 +173,58 @@ async function updateAccount(req, res, next) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email, account_id } = req.body
 
-  const updateResult = await accountModel.updateAccount(
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_id
-  )
+  try {
+    // Actualizar datos en DB
+    const updateResult = await accountModel.updateAccount(
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id
+    )
 
-  if (updateResult) {
-    req.flash("notice", "Account information updated successfully.")
+    if (!updateResult) {
+      req.flash("notice", "Update failed, please try again.")
+      return res.status(500).render("account/update", {
+        title: "Update Account",
+        nav,
+        errors: null,
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_id
+      })
+    }
 
-    /** 🔄 Actualizamos el JWT porque cambió la info del usuario */
-    const updatedUser = await accountModel.getAccountById(account_id)
+    /** 🔄 Obtener usuario actualizado para recrear JWT */
+    const updatedUser = await accountModel.getAccountByEmail(account_email)
     delete updatedUser.account_password
-    const accessToken = jwt.sign(updatedUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
 
+    const accessToken = jwt.sign(updatedUser, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1h"
+    })
+
+    res.cookie("jwt", accessToken, {
+      httpOnly: true,
+      maxAge: 3600 * 1000
+    })
+
+    req.flash("notice", "Account information updated successfully.")
     return res.redirect("/account/management")
+
+  } catch (error) {
+    console.error("Update error:", error)
+    req.flash("notice", "An error occurred while updating your account.")
+    return res.status(500).render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id
+    })
   }
-
-  req.flash("notice", "Update failed, please try again.")
-  return res.status(500).render("account/update", {
-    title: "Update Account",
-    nav,
-    errors: null,
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_id
-  })
 }
-
 
 /* Process password update*/
 

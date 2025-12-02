@@ -55,7 +55,7 @@ router.get(
 router.post(
   "/update",
   utilities.checkLogin,
-  regValidate.loginRules(),
+  regValidate.EditAccountRules(),
   regValidate.checkEditData,
   utilities.handleErrors(accountController.updateAccount)
 )
