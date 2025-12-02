@@ -38,11 +38,11 @@ router.get(
 )
 
 router.post(
-  "/addNewVvehicle",
+  "/add-vehicle",
   utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkInventoryData,
-  invController.addVehicle
+  utilities.handleErrors(invController.addVehicle)
 )
 
 router.get(
@@ -56,7 +56,7 @@ router.post(
   utilities.checkEmployeeOrAdmin,
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
-  invController.updateInventory
+  utilities.handleErrors(invController.updateInventory)
 )
 
 router.get(
@@ -70,6 +70,10 @@ router.post(
   utilities.checkEmployeeOrAdmin,
   utilities.handleErrors(invController.deleteInventoryItem)
 )
-
+router.get(
+  "/getInventory/:classification_id",
+  utilities.checkEmployeeOrAdmin,
+  utilities.handleErrors(invController.getInventoryJSON)
+)
 
 module.exports = router;

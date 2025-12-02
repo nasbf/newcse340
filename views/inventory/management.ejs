@@ -1,4 +1,5 @@
 <!-- title as h1 -->
+ 
  <% if (title) { %>
 <h1><%= title %></h1>
 <% } else {
@@ -16,7 +17,7 @@
     <% } %>
   <% } %>
 
-
+  
   <section id="update-account">
     <p>
       <a href="/account/update/<%= account_id %>">
@@ -28,6 +29,11 @@
   <!-- ONLY EMPLOYEE O ADMIN -->
   <% if (locals.account_type === 'Employee' || locals.account_type === 'Admin') { %>
     <h2>Manage Inventory</h2>
+    <ul>
+      <li><a href="/inv/add-classification">Add New Classification</a></li>
+      <li><a href="/inv/add-vehicle">Add New Vehicle</a></li>
+    </ul>
+    
     <p>Select a classification from the list</p>
     <%- classificationSelect %>
     <table class="inventoryDisplay" id="inventoryDisplay"></table>
