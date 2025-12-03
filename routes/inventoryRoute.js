@@ -76,4 +76,11 @@ router.get(
   utilities.handleErrors(invController.getInventoryJSON)
 )
 
+
+router.get(
+  "/getInventoryPublic/:classification_id",
+  
+   utilities.handleErrors(invController.getRequestsJSON)
+)
+
 module.exports = router;

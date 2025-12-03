@@ -377,4 +377,19 @@ invCont.buildDeleteView = async function (req, res, next) {
   }
 }
 
+
+/* ***************************
+ *  Return Requestable vehicles as JSON
+ * ************************** */
+invCont.getRequestsJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+
+  if (invData && invData.length > 0) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
 module.exports = invCont

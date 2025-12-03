@@ -385,43 +385,43 @@ input:valid {
 }
 
 
-#inventoryDisplay {
+.inventoryDisplay {
   background-color: var(--primary-color);
   margin-top: 40px;
   font-family: var(--principal-font);
   color: white; 
   padding: 20px;
 }
-#inventoryDisplay{
+.inventoryDisplay{
   border-radius: 10px;
 }
 
-#inventoryDisplay .datatable {
+.inventoryDisplay .datatable {
   width: 100%;
   border-collapse: collapse;
   font-family: var(--principal-font);
    
 }
 
-#inventoryDisplay th,
-#inventoryDisplay td {
+.inventoryDisplay th,
+.inventoryDisplay td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   color: white;      
  
 }
 
-#inventoryDisplay td a{
+.inventoryDisplay td a{
   text-decoration: none;
   color: white;
 }
 
-#inventoryDisplay td a:hover {
+.inventoryDisplay td a:hover {
   color: var(--accent-color); 
   text-decoration: underline; 
 }
 
-#inventoryDisplay th {
+.inventoryDisplay th {
   background-color: #2a2a2a;
   font-size: 1.2rem;
   font-family: var(--secondary-font);
