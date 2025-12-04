@@ -404,8 +404,9 @@ invCont.buildRequestView = async function (req, res, next) {
   if (!data || data.length === 0) {
     return next({ status: 404, message: "Vehicle not found" })
   }
-
+  const itemData = data[0]
   const gridDetail = await utilities.buildDetailGrid(data)
+  
   let nav = await utilities.getNav()
   const title = `Request: ${data[0].inv_make} ${data[0].inv_model}`
 
@@ -413,8 +414,26 @@ invCont.buildRequestView = async function (req, res, next) {
     title,
     nav,
     gridDetail,
+    itemData,
     errors: null
   })
+}
+
+invCont.processRequest = async function (req, res, next) {
+  console.log("🟢 processRequest FUNCIONA. Datos recibidos:", req.body);
+  try {
+    const client_id = res.locals.account_id; 
+    const inv_id = parseInt(req.body.inv_id);
+
+    const result = await invModel.requestVehicle(inv_id, client_id);
+
+    req.flash("notice", "Your request was submitted successfully.");
+    return res.redirect("/");
+  } catch (error) {
+    console.error("processRequest error:", error);
+    req.flash("notice", "Error processing request.");
+    return res.redirect("/");
+  }
 }
 
 module.exports = invCont

@@ -245,3 +245,14 @@ SET inv_description = REPLACE(
 UPDATE inventory
 SET inv_image = REPLACE (inv_image, '/images', '/images/vehicles'),
     inv_thumbnail = REPLACE (inv_thumbnail, '/images', '/images/vehicles');
+
+
+-- Create table to request a vehicle
+
+CREATE TABLE public.vehicle_requests (
+  request_id SERIAL PRIMARY KEY,
+  inv_id INT NOT NULL,
+  client_id INT NOT NULL,
+  request_date TIMESTAMP DEFAULT NOW(),
+  status VARCHAR(20) DEFAULT 'pending'
+);

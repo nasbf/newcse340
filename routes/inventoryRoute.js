@@ -84,10 +84,20 @@ router.get(
    utilities.handleErrors(invController.getRequestsJSON)
 )
 
-router.get("/request/:inv_id",
-  utilities.checkLogin, 
+// Request View (GET)
+router.get(
+  "/request/:inv_id",
+  utilities.checkLogin,
   utilities.handleErrors(invController.buildRequestView)
 );
+
+// Request Processing (POST)
+router.post(
+  "/request",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.processRequest)
+);
+
 
 
 module.exports = router;

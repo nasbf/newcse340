@@ -146,5 +146,21 @@ async function deleteInventoryItem(inv_id) {
 }
 
 
+/* Save vehicle request */
+async function requestVehicle(inv_id, client_id) {
+  try {
+    const sql = `INSERT INTO vehicle_requests (inv_id, client_id)
+                 VALUES ($1, $2) RETURNING *;`;
+    const requestResult = await pool.query(sql, [inv_id, client_id]);
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addInventory, addClassification, updateInventory, deleteInventoryItem};
+    const deleteSql = `DELETE FROM inventory WHERE inv_id = $1;`;
+    await pool.query(deleteSql, [inv_id]);
+
+    return requestResult.rows[0];
+  } catch (error) {
+    console.error("requestVehicle error: ", error);
+    throw error;
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addInventory, addClassification, updateInventory, deleteInventoryItem, requestVehicle};

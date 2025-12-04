@@ -440,6 +440,13 @@ select {
   outline: none;
   margin-top: 10px;
 }
+#buttonRequest{
+  width: 100%;
+
+  padding: 20px;
+  font-weight: 600;
+
+}
 
 /***********************/
 /* Responsivo */
