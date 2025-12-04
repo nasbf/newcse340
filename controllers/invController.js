@@ -392,4 +392,29 @@ invCont.getRequestsJSON = async (req, res, next) => {
   }
 }
 
+
+/* request vehicle view */ 
+
+invCont.buildRequestView = async function (req, res, next) {
+
+  const inv_id = parseInt(req.params.inv_id)
+
+  const data = await invModel.getInventoryByInvId(inv_id)
+
+  if (!data || data.length === 0) {
+    return next({ status: 404, message: "Vehicle not found" })
+  }
+
+  const gridDetail = await utilities.buildDetailGrid(data)
+  let nav = await utilities.getNav()
+  const title = `Request: ${data[0].inv_make} ${data[0].inv_model}`
+
+  res.render("inventory/request", {
+    title,
+    nav,
+    gridDetail,
+    errors: null
+  })
+}
+
 module.exports = invCont

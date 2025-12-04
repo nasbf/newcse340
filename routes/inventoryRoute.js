@@ -4,6 +4,7 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const invValidate = require("../utilities/inventory-validation")
 const utilities = require("../utilities/")
+const invCont = require("../controllers/invController")
 
 // Route to build inventory by classification view
 // NO PROTEGER estas (son públicas)
@@ -82,5 +83,11 @@ router.get(
   
    utilities.handleErrors(invController.getRequestsJSON)
 )
+
+router.get("/request/:inv_id",
+  utilities.checkLogin, 
+  utilities.handleErrors(invController.buildRequestView)
+);
+
 
 module.exports = router;
